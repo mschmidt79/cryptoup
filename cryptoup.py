@@ -6,7 +6,7 @@ from tkinter.messagebox import * # Вызываем модуль messagebox дл
  
 def open_vol():
     op = askopenfilename() #Присваиваем переменной op путь и имя открываемого файла
-    txt.insert(END,op) #Вставляем переменную op в текстовое поле
+    e1.insert(END,op) #Вставляем переменную op в текстовое поле
   
 def about():
         showinfo("svedbox", "This software as a whole. Copyright © 2014 svedbox@gmail.com. All rights reserved.")
@@ -14,10 +14,25 @@ def about():
 def close_win():
      root.destroy() #Закрываем программу (окно)
 
+
+
 root = Tk() #Запуск окна программы
+
 root.title("Cryptoup") #Заголовок программы
-txt = Text(root,width=40,height=15,font="12") # Формирование текстового окна
-txt.pack()# Вывод текстового окна
+root.geometry('700x100+300+200')
+root.resizable(False, False) # размер окна может быть изменен только по горизонтали
+
+l1 = Label(root, text="Volume: ")
+l1.pack( side = LEFT)
+
+e1 = Entry(root,width=40)
+e1.pack(side=LEFT)
+
+btn1 = Button(root, text="Select file", width=5, bg="white",fg="black", command = open_vol) 
+btn1.pack(side = LEFT)
+
+btn2 = Button(root, text="Mount", width=5, bg="white",fg="black", command = about) 
+btn2.pack(side = LEFT)
 
 m = Menu(root) 
 root.config(menu=m) 
@@ -29,11 +44,11 @@ fm.add_command(label="Mount volume",command=open_vol)
 fm.add_command(label="Dismount volume",command=about)
 fm.add_command(label="Exit",command=close_win)
 
-pm = Menu(m) #Создание меню
+pm = Menu(m) 
 m.add_cascade(label="Help",menu=pm) 
 pm.add_command(label="About",command=about) 
 
 
- 
+
 root.mainloop() 
 
