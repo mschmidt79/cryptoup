@@ -3,6 +3,7 @@
 from tkinter import * # Вызываем модуль tkinter
 from tkinter.filedialog import * # Вызываем модуль filedialog для выбора файлов
 from tkinter.messagebox import * # Вызываем модуль messagebox для вывода сообщений
+import subprocess
  
 def open_vol():
     op = askopenfilename() #Присваиваем переменной op путь и имя открываемого файла
@@ -13,6 +14,16 @@ def about():
 
 def close_win():
      root.destroy() #Закрываем программу (окно)
+
+def runstop():                             #
+     cmd = 'umount -l /media/cryptoup/'    #
+     subprocess.Popen(cmd, shell = True)   #
+     cmd2 ='tcplay --unmap=secvol'         #
+     subprocess.Popen(cmd2, shell = True)  # Хреново работает, подозрение что не попорядку выполняется
+     cmd3 ='losetup -d /dev/loop1'         #
+     subprocess.Popen(cmd3, shell = True)  #
+     cmd4 ='rmdir /media/cryptoup'         #
+     subprocess.Popen(cmd4, shell = True)  #
 
 
 
@@ -33,6 +44,9 @@ btn1.pack(side = LEFT)
 
 btn2 = Button(root, text="Mount", width=5, bg="white",fg="black", command = about) 
 btn2.pack(side = LEFT)
+
+btn3 = Button(root, text="Dismount", width=5, bg="white",fg="black", command = runstop) 
+btn3.pack(side = LEFT)
 
 m = Menu(root) 
 root.config(menu=m) 
