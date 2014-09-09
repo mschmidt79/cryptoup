@@ -20,7 +20,7 @@ sudo losetup /dev/loop1 $FILE
 sudo tcplay --map=secvol --device=/dev/loop1
 sudo mount /dev/mapper/secvol /media/cryptoup/
 
-read  -s -n1 -p "***PRESS ANY KEY FOR DISMOUNT CRYPTO DISK***" keypress
+read  -s -n1 -p "*** PRESS ANY KEY FOR DISMOUNT CRYPTO DISK ***" keypress
 
 sudo umount -l /media/cryptoup/
 sudo tcplay --unmap=secvol
