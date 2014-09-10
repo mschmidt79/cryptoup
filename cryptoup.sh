@@ -7,7 +7,7 @@ SHELL=/bin/sh PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #      to run through the           #
 #     terminal (without GUI)        #
 #   --------------------------      # 
-#   Before running you need         #
+#   before running you need         #
 #    make the file executable       #
 #  (sudo chmod +x .../cryptoup.sh)  #
 #####################################
@@ -16,9 +16,10 @@ FILE=`zenity --file-selection --title="Select crypto-container file"`
 clear
 
 sudo mkdir /media/cryptoup
+sudo chmod 777 /media/cryptoup
 sudo losetup /dev/loop1 $FILE 
 sudo tcplay --map=secvol --device=/dev/loop1
-sudo mount /dev/mapper/secvol /media/cryptoup/
+sudo mount -o rw /dev/mapper/secvol /media/cryptoup/ -o uid=1000,gid=1000
 
 read  -s -n1 -p "*** PRESS ANY KEY FOR DISMOUNT CRYPTO DISK ***" keypress
 
@@ -29,3 +30,4 @@ sudo rmdir /media/cryptoup
 
 echo; echo "OK"
 exit 0
+
